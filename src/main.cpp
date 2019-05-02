@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Vec2.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");

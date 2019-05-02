@@ -10,7 +10,7 @@ add_compile_options(-m64)
 add_link_options(-static-libgcc -static-libstdc++)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_compile_options(-g -Wall -Wextra -Wshadow -W -pedantic)
+    add_compile_options(-g -Wall -Wextra -Wshadow -W -pedantic -Weffc++)
 else()
     add_compile_options(-O2)
 endif()
@@ -29,7 +29,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML 2 REQUIRED COMPONENTS audio graphics window system)
 
 if (SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
+    # the SYSTEM specifies that warnings should not be generated for these headers
+    include_directories(SYSTEM ${SFML_INCLUDE_DIR})
     target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 else()
     message(FATAL_ERROR "SFML Could not be found.")
