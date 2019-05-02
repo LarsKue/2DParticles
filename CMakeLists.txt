@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(2DParticles)
+project(2DParticles VERSION 0.1.0 DESCRIPTION "A 2-dimensional Particle Renderer.")
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -34,3 +34,10 @@ if (SFML_FOUND)
 else()
     message(FATAL_ERROR "SFML Could not be found.")
 endif()
+
+# copy the dlls from SFML to the exe dir
+add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${SFML_ROOT}/bin"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
